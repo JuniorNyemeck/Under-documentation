@@ -1,0 +1,191 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 0 100% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 0 100% 67%;
+
+    --radius: 0.5rem;
+
+    /* Under specific colors */
+    --under-primary: 247 44% 60%;
+    --under-primary-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 220 26% 14%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 26% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 26% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 247 44% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 247 44% 60%;
+  }
+
+  /* Custom selection colors */
+  ::selection {
+    background-color: rgba(136, 146, 190, 0.3);
+    color: #8892BE;
+  }
+
+  ::-moz-selection {
+    background-color: rgba(136, 146, 190, 0.3);
+    color: #8892BE;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose h1 {
+    @apply text-3xl font-bold text-foreground mb-4;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-semibold text-foreground mt-8 mb-4;
+  }
+
+  .prose h3 {
+    @apply text-xl font-semibold text-foreground mt-6 mb-3;
+  }
+
+  .prose p {
+    @apply text-muted-foreground mb-4 leading-relaxed;
+  }
+
+  .prose code {
+    @apply bg-muted px-2 py-1 rounded text-sm font-mono;
+  }
+
+  .prose pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-[#8892BE] pl-4 italic text-muted-foreground;
+  }
+
+  .prose ul {
+    @apply list-disc ml-6 mb-4;
+  }
+
+  .prose ol {
+    @apply list-decimal ml-6 mb-4;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose a {
+    @apply text-[#8892BE] hover:text-[#8892BE]/80 transition-colors;
+  }
+}
+
+/* Under-specific animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Code block styling */
+pre code {
+  color: #e1e5e9 !important;
+  background: transparent !important;
+}
+
+.language-php .token.keyword {
+  color: #c792ea;
+}
+
+.language-php .token.string {
+  color: #c3e88d;
+}
+
+.language-php .token.comment {
+  color: #546e7a;
+}
+
+.language-bash .token.command {
+  color: #82aaff;
+}
