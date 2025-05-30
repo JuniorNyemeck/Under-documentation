@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { documentationData, DocSection, DocItem } from '@/data/documentation';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
@@ -12,7 +13,8 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ activeSection, activeItem, onItemSelect, className }: SidebarProps) => {
-  const [expandedSections, setExpandedSections] = useState<string[]>(['prologue', 'getting-started']);
+  const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started', 'fundamentals']);
+  const { language } = useLanguage();
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev =>
@@ -32,7 +34,7 @@ const Sidebar = ({ activeSection, activeItem, onItemSelect, className }: Sidebar
                 onClick={() => toggleSection(section.id)}
                 className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-left hover:bg-muted rounded-md transition-colors"
               >
-                <span className="text-foreground">{section.title}</span>
+                <span className="text-foreground">{section.title[language]}</span>
                 {expandedSections.includes(section.id) ? (
                   <ChevronDown className="h-4 w-4 text-muted-foreground" />
                 ) : (
@@ -49,11 +51,11 @@ const Sidebar = ({ activeSection, activeItem, onItemSelect, className }: Sidebar
                       className={cn(
                         "w-full px-3 py-2 text-sm text-left hover:bg-muted rounded-md transition-colors",
                         activeSection === section.id && activeItem === item.id
-                          ? "bg-red-50 text-red-600 dark:bg-red-950/50 dark:text-red-400 border-l-2 border-red-500"
+                          ? "bg-[#8892BE]/10 text-[#8892BE] dark:bg-[#8892BE]/20 dark:text-[#8892BE] border-l-2 border-[#8892BE]"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                     >
-                      {item.title}
+                      {item.title[language]}
                     </button>
                   ))}
                 </div>

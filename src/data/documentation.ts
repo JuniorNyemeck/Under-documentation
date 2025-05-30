@@ -1,380 +1,1639 @@
 
 export interface DocSection {
   id: string;
-  title: string;
+  title: {
+    en: string;
+    fr: string;
+  };
   items: DocItem[];
 }
 
 export interface DocItem {
   id: string;
-  title: string;
-  content?: string;
+  title: {
+    en: string;
+    fr: string;
+  };
+  content?: {
+    en: string;
+    fr: string;
+  };
   subsections?: DocSubsection[];
 }
 
 export interface DocSubsection {
   id: string;
-  title: string;
-  content: string;
+  title: {
+    en: string;
+    fr: string;
+  };
+  content: {
+    en: string;
+    fr: string;
+  };
 }
 
 export const documentationData: DocSection[] = [
   {
-    id: "prologue",
-    title: "Prologue",
-    items: [
-      {
-        id: "release-notes",
-        title: "Release Notes",
-        content: `
-# Release Notes
-
-Laravel follows semantic versioning. Major framework releases are released every six months (~February and ~August), while minor and patch releases may be released as often as every week. Minor and patch releases should never contain breaking changes.
-
-## Versioning Scheme
-
-Laravel and its other first-party packages follow Semantic Versioning. Major framework releases are released every six months (~February and ~August), while minor and patch releases may be released as often as every week. Minor and patch releases should **never** contain breaking changes.
-
-When referencing the Laravel framework or its components from your application or package, you should always use a version constraint such as \`^10.0\`, since major releases of Laravel do include breaking changes.
-
-## Support Policy
-
-For LTS releases, such as Laravel 9, bug fixes are provided for 2 years and security fixes are provided for 3 years. These releases provide the longest window of support and maintenance. For general releases, bug fixes are provided for 18 months and security fixes are provided for 2 years.
-
-## Laravel 10
-
-Laravel 10 continues the improvements made in Laravel 9.x by introducing argument and return types to all application skeleton methods, as well as all stub files used to generate classes throughout the framework.
-        `
-      },
-      {
-        id: "upgrade-guide",
-        title: "Upgrade Guide",
-        content: `
-# Upgrade Guide
-
-## Upgrading To 10.0 From 9.x
-
-### Estimated Upgrade Time: 10 - 15 Minutes
-
-We attempt to document every possible breaking change. Since some of these breaking changes are in obscure parts of the framework, only a portion of these changes may actually affect your application.
-
-### Updating Dependencies
-
-**Likelihood Of Impact: High**
-
-#### PHP 8.1.0 Required
-
-Laravel now requires PHP 8.1.0 or greater.
-
-#### Composer Dependencies
-
-You should update the following dependencies in your application's \`composer.json\` file:
-
-- \`laravel/framework\` to \`^10.0\`
-- \`nunomaduro/collision\` to \`^7.0\`
-- \`phpunit/phpunit\` to \`^10.0\`
-- \`spatie/laravel-ignition\` to \`^2.0\`
-        `
-      },
-      {
-        id: "contribution-guide",
-        title: "Contribution Guide",
-        content: `
-# Contribution Guide
-
-## Bug Reports
-
-To encourage active collaboration, Laravel strongly encourages pull requests, not just bug reports. Pull requests will only be reviewed when marked as "ready for review" (not in the "draft" state) and all tests for new features are passing. Lingering, non-active pull requests left in the "draft" state will be closed after a few days.
-
-However, if you file a bug report, your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue.
-
-## Core Development Discussion
-
-You may propose new features or improvements of existing Laravel behavior in the Laravel framework repository's GitHub discussion board. If you propose a new feature, please be willing to implement at least some of the code that would be needed to complete the feature.
-        `
-      }
-    ]
-  },
-  {
     id: "getting-started",
-    title: "Getting Started",
+    title: {
+      en: "Getting Started",
+      fr: "Premiers pas"
+    },
     items: [
       {
-        id: "installation",
-        title: "Installation",
-        content: `
-# Installation
+        id: "introduction",
+        title: {
+          en: "Introduction",
+          fr: "Introduction"
+        },
+        content: {
+          en: `
+# Introduction
 
-## Meet Laravel
+Welcome to Under Framework documentation. Under is a modern, powerful PHP framework designed for building robust web applications with elegant syntax and developer-friendly features.
 
-Laravel is a web application framework with expressive, elegant syntax. A web framework provides a structure and starting point for creating your application, allowing you to focus on creating something amazing while we sweat the details.
+## What is Under Framework?
 
-Laravel strives to provide an amazing developer experience while providing powerful features such as thorough dependency injection, an expressive database abstraction layer, queues and scheduled jobs, unit and integration testing, and more.
+Under Framework is built with modern PHP practices in mind, offering:
 
-## Your First Laravel Project
-
-Before creating your first Laravel project, you should ensure that your local machine has PHP and Composer installed. If you are developing on macOS, PHP and Composer can be installed via Homebrew. In addition, we recommend installing Node and NPM.
-
-After you have installed PHP and Composer, you may create a new Laravel project via the Composer \`create-project\` command:
-
-\`\`\`bash
-composer create-project laravel/laravel example-app
-\`\`\`
-
-Or, you may create new Laravel projects by globally installing the Laravel installer via Composer:
-
-\`\`\`bash
-composer global require laravel/installer
-
-laravel new example-app
-\`\`\`
-        `
-      },
-      {
-        id: "configuration",
-        title: "Configuration",
-        content: `
-# Configuration
-
-## Introduction
-
-All of the configuration files for the Laravel framework are stored in the \`config\` directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
-
-These configuration files allow you to configure things like your database connection information, your mail server information, as well as various other core configuration values such as your application timezone and encryption key.
-
-## Environment Configuration
-
-It is often helpful to have different configuration values based on the environment where the application is running. For example, you may wish to use a different cache driver locally than you do on your production server.
-
-To make this a cinch, Laravel utilizes the DotEnv PHP library. In a fresh Laravel installation, the root directory of your application will contain a \`.env.example\` file that defines many common environment variables. During the Laravel installation process, this file will automatically be copied to \`.env\`.
-        `
-      },
-      {
-        id: "directory-structure",
-        title: "Directory Structure",
-        content: `
-# Directory Structure
-
-## Introduction
-
-The default Laravel application structure is intended to provide a great starting point for both large and small applications. But you are free to organize your application however you like. Laravel imposes almost no restrictions on where any given class is located - as long as Composer can autoload the class.
-
-## The Root Directory
-
-### The App Directory
-
-The \`app\` directory contains the core code of your application. We'll explore this directory in more detail soon; however, almost all of the classes in your application will be in this directory.
-
-### The Bootstrap Directory
-
-The \`bootstrap\` directory contains the \`app.php\` file which bootstraps the framework. This directory also houses a \`cache\` directory which contains framework generated files for performance optimization such as the route and services cache files.
-
-### The Config Directory
-
-The \`config\` directory, as the name implies, contains all of your application's configuration files. It's a great idea to read through all of these files and familiarize yourself with all of the options available to you.
-        `
-      }
-    ]
-  },
-  {
-    id: "architecture",
-    title: "Architecture Concepts",
-    items: [
-      {
-        id: "request-lifecycle",
-        title: "Request Lifecycle",
-        content: `
-# Request Lifecycle
-
-## Introduction
-
-When using any tool in the "real world", you feel more confident if you understand how that tool works. Application development is no different. When you understand how your development tools function, you feel more comfortable and confident using them.
-
-The goal of this document is to give you a good, high-level overview of how the Laravel framework works. By getting to know the overall framework better, everything feels less "magical" and you will be more confident building your applications.
-
-## Lifecycle Overview
-
-### First Things
-
-The entry point for all requests to a Laravel application is the \`public/index.php\` file. All requests are directed to this file by your web server (Apache / Nginx) configuration. The \`index.php\` file doesn't contain much code. Rather, it is a starting point for loading the rest of the framework.
-
-The \`index.php\` file loads the Composer generated autoloader definition, and then retrieves an instance of the Laravel application from \`bootstrap/app.php\` script. The first action taken by Laravel itself is to create an instance of the application / service container.
-        `
-      },
-      {
-        id: "service-container",
-        title: "Service Container",
-        content: `
-# Service Container
-
-## Introduction
-
-The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection. Dependency injection is a fancy phrase that essentially means this: class dependencies are "injected" into the class via the constructor or, in some cases, "setter" methods.
-
-Let's look at a simple example:
+- **Intuitive Syntax**: Clean, expressive code that reads like natural language
+- **Modular Architecture**: Build scalable applications with reusable components
+- **Advanced ORM**: Chronos ORM for elegant database interactions
+- **Security First**: Built-in security features and best practices
 
 \`\`\`php
 <?php
 
-namespace App\\Http\\Controllers;
+use Under\\Core\\Application;
+use Under\\Http\\Request;
+use Under\\Http\\Response;
 
-use App\\Http\\Controllers\\Controller;
-use App\\Repositories\\UserRepository;
-use App\\Models\\User;
+$app = new Application();
 
-class UserController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct(
-        protected UserRepository $users,
-    ) {}
+$app->get('/', function (Request $request): Response {
+    return response()->json([
+        'message' => 'Welcome to Under Framework!'
+    ]);
+});
 
-    /**
-     * Show the profile for the given user.
-     */
-    public function show(string $id): View
-    {
-        $user = $this->users->find($id);
-
-        return view('user.profile', ['user' => $user]);
-    }
-}
+$app->run();
 \`\`\`
 
-In this example, the \`UserController\` needs to retrieve users from a data source. So, we will **inject** a service that is able to retrieve users.
-        `
-      },
-      {
-        id: "service-providers",
-        title: "Service Providers",
-        content: `
-# Service Providers
+## Key Features
 
-## Introduction
+- **Chronos ORM**: Advanced object-relational mapping
+- **Component Builder**: Create modular, reusable components
+- **Maker Tool**: Code generation and scaffolding
+- **Built-in Security**: OAuth2, SSO, encryption
+- **Multi-language Support**: Internationalization ready
+          `,
+          fr: `
+# Introduction
 
-Service providers are the central place of all Laravel application bootstrapping. Your own application, as well as all of Laravel's core services, are bootstrapped via service providers.
+Bienvenue dans la documentation du Framework Under. Under est un framework PHP moderne et puissant conçu pour créer des applications web robustes avec une syntaxe élégante et des fonctionnalités conviviales pour les développeurs.
 
-But, what do we mean by "bootstrapped"? In general, we mean **registering** things, including registering service container bindings, event listeners, middleware, and even routes. Service providers are the central place to configure your application.
+## Qu'est-ce que le Framework Under ?
 
-If you open the \`config/app.php\` file included with Laravel, you will see a \`providers\` array. These are all of the service provider classes that will be loaded for your application. Note that many of these are "deferred" providers, meaning they will not be loaded on every request, but only when the services they provide are actually needed.
+Le Framework Under est conçu avec les pratiques PHP modernes à l'esprit, offrant :
 
-## Writing Service Providers
-
-All service providers extend the \`Illuminate\\Support\\ServiceProvider\` class. Most service providers contain a \`register\` and a \`boot\` method. Within the \`register\` method, you should **only bind things into the service container**. You should never attempt to register any event listeners, routes, or any other piece of functionality within the \`register\` method.
-        `
-      }
-    ]
-  },
-  {
-    id: "basics",
-    title: "The Basics",
-    items: [
-      {
-        id: "routing",
-        title: "Routing",
-        content: `
-# Routing
-
-## Basic Routing
-
-The most basic Laravel routes accept a URI and a closure, providing a very simple and expressive method of defining routes and behavior without complicated routing configuration files:
+- **Syntaxe Intuitive** : Code propre et expressif qui se lit comme un langage naturel
+- **Architecture Modulaire** : Construisez des applications évolutives avec des composants réutilisables
+- **ORM Avancé** : Chronos ORM pour des interactions élégantes avec la base de données
+- **Sécurité d'abord** : Fonctionnalités de sécurité intégrées et bonnes pratiques
 
 \`\`\`php
-use Illuminate\\Support\\Facades\\Route;
+<?php
 
-Route::get('/greeting', function () {
-    return 'Hello World';
+use Under\\Core\\Application;
+use Under\\Http\\Request;
+use Under\\Http\\Response;
+
+$app = new Application();
+
+$app->get('/', function (Request $request): Response {
+    return response()->json([
+        'message' => 'Bienvenue dans Under Framework!'
+    ]);
+});
+
+$app->run();
+\`\`\`
+
+## Fonctionnalités Clés
+
+- **Chronos ORM** : Mapping objet-relationnel avancé
+- **Component Builder** : Créez des composants modulaires et réutilisables
+- **Outil Maker** : Génération de code et échafaudage
+- **Sécurité Intégrée** : OAuth2, SSO, chiffrement
+- **Support Multi-langues** : Prêt pour l'internationalisation
+          `
+        }
+      },
+      {
+        id: "installation",
+        title: {
+          en: "Installation",
+          fr: "Installation"
+        },
+        content: {
+          en: `
+# Installation
+
+Get started with Under Framework in minutes. Follow these simple steps to set up your development environment.
+
+## System Requirements
+
+- PHP 8.1 or higher
+- Composer 2.0 or higher
+- MySQL 8.0+ or PostgreSQL 13+
+- Node.js 16+ (for frontend assets)
+
+## Quick Installation
+
+Create a new Under project using Composer:
+
+\`\`\`bash
+composer create-project under/framework my-project
+cd my-project
+\`\`\`
+
+## Environment Setup
+
+Copy the environment file and configure your settings:
+
+\`\`\`bash
+cp .env.example .env
+php under key:generate
+\`\`\`
+
+Configure your database in the \`.env\` file:
+
+\`\`\`env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=under_app
+DB_USERNAME=root
+DB_PASSWORD=
+\`\`\`
+
+## Development Server
+
+Start the built-in development server:
+
+\`\`\`bash
+php under serve
+\`\`\`
+
+Your application will be available at \`http://localhost:8000\`.
+
+## Directory Permissions
+
+Ensure the following directories are writable:
+
+\`\`\`bash
+chmod -R 755 storage
+chmod -R 755 bootstrap/cache
+\`\`\`
+          `,
+          fr: `
+# Installation
+
+Commencez avec Under Framework en quelques minutes. Suivez ces étapes simples pour configurer votre environnement de développement.
+
+## Prérequis Système
+
+- PHP 8.1 ou supérieur
+- Composer 2.0 ou supérieur
+- MySQL 8.0+ ou PostgreSQL 13+
+- Node.js 16+ (pour les assets frontend)
+
+## Installation Rapide
+
+Créez un nouveau projet Under en utilisant Composer :
+
+\`\`\`bash
+composer create-project under/framework mon-projet
+cd mon-projet
+\`\`\`
+
+## Configuration de l'Environnement
+
+Copiez le fichier d'environnement et configurez vos paramètres :
+
+\`\`\`bash
+cp .env.example .env
+php under key:generate
+\`\`\`
+
+Configurez votre base de données dans le fichier \`.env\` :
+
+\`\`\`env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=under_app
+DB_USERNAME=root
+DB_PASSWORD=
+\`\`\`
+
+## Serveur de Développement
+
+Démarrez le serveur de développement intégré :
+
+\`\`\`bash
+php under serve
+\`\`\`
+
+Votre application sera disponible à \`http://localhost:8000\`.
+
+## Permissions des Répertoires
+
+Assurez-vous que les répertoires suivants sont en écriture :
+
+\`\`\`bash
+chmod -R 755 storage
+chmod -R 755 bootstrap/cache
+\`\`\`
+          `
+        }
+      },
+      {
+        id: "premiers-pas",
+        title: {
+          en: "First Steps",
+          fr: "Premiers pas"
+        },
+        content: {
+          en: `
+# First Steps
+
+Now that you have Under Framework installed, let's create your first application and explore the basic concepts.
+
+## Your First Route
+
+Create a simple route in \`routes/web.php\`:
+
+\`\`\`php
+<?php
+
+use Under\\Http\\Request;
+use Under\\Http\\Response;
+
+Route::get('/hello', function (Request $request): Response {
+    return response()->view('hello', [
+        'name' => $request->query('name', 'World')
+    ]);
 });
 \`\`\`
 
-### The Default Route Files
+## Creating a Controller
 
-All Laravel routes are defined in your route files, which are located in the \`routes\` directory. These files are automatically loaded by your application's \`App\\Providers\\RouteServiceProvider\`. The \`routes/web.php\` file defines routes that are for your web interface. These routes are assigned the \`web\` middleware group, which provides features like session state and CSRF protection.
-
-### Available Router Methods
-
-The router allows you to register routes that respond to any HTTP verb:
-
-\`\`\`php
-Route::get($uri, $callback);
-Route::post($uri, $callback);
-Route::put($uri, $callback);
-Route::patch($uri, $callback);
-Route::delete($uri, $callback);
-Route::options($uri, $callback);
-\`\`\`
-        `
-      },
-      {
-        id: "middleware",
-        title: "Middleware",
-        content: `
-# Middleware
-
-## Introduction
-
-Middleware provide a convenient mechanism for inspecting and filtering HTTP requests entering your application. For example, Laravel includes a middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to your application's login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.
-
-Additional middleware can be written to perform a variety of tasks besides authentication. For example, a logging middleware might log all incoming requests to your application. There are several middleware included in the Laravel framework, including middleware for authentication and CSRF protection. All of these middleware are located in the \`app/Http/Middleware\` directory.
-
-## Defining Middleware
-
-To create a new middleware, use the \`make:middleware\` Artisan command:
+Generate a new controller using the Maker tool:
 
 \`\`\`bash
-php artisan make:middleware EnsureTokenIsValid
+php under make:controller WelcomeController
 \`\`\`
 
-This command will place a new \`EnsureTokenIsValid\` class within your \`app/Http/Middleware\` directory.
-        `
-      },
-      {
-        id: "controllers",
-        title: "Controllers",
-        content: `
-# Controllers
-
-## Introduction
-
-Instead of defining all of your request handling logic as closures in your route files, you may wish to organize this behavior using "controller" classes. Controllers can group related request handling logic into a single class. For example, a \`UserController\` class might handle all incoming requests related to users, including showing, creating, updating, and deleting users. By default, controllers are stored in the \`app/Http/Controllers\` directory.
-
-## Writing Controllers
-
-### Basic Controllers
-
-Let's take a look at an example of a basic controller. Note that the controller extends the base controller class included with Laravel: \`App\\Http\\Controllers\\Controller\`:
+This creates a controller in \`app/Controllers/WelcomeController.php\`:
 
 \`\`\`php
 <?php
 
-namespace App\\Http\\Controllers;
+namespace App\\Controllers;
 
-use App\\Http\\Controllers\\Controller;
-use App\\Models\\User;
-use Illuminate\\View\\View;
+use Under\\Http\\Controller;
+use Under\\Http\\Request;
+use Under\\Http\\Response;
 
-class UserController extends Controller
+class WelcomeController extends Controller
 {
-    /**
-     * Show the profile for a given user.
-     */
-    public function show(string $id): View
+    public function index(Request $request): Response
     {
-        return view('user.profile', [
-            'user' => User::findOrFail($id)
+        return response()->view('welcome');
+    }
+    
+    public function show(Request $request, string $id): Response
+    {
+        return response()->json([
+            'id' => $id,
+            'message' => 'Hello from controller!'
         ]);
     }
 }
 \`\`\`
-        `
+
+## Using the Controller
+
+Update your routes to use the controller:
+
+\`\`\`php
+Route::get('/welcome', [WelcomeController::class, 'index']);
+Route::get('/welcome/{id}', [WelcomeController::class, 'show']);
+\`\`\`
+          `,
+          fr: `
+# Premiers pas
+
+Maintenant que vous avez installé Under Framework, créons votre première application et explorons les concepts de base.
+
+## Votre Première Route
+
+Créez une route simple dans \`routes/web.php\` :
+
+\`\`\`php
+<?php
+
+use Under\\Http\\Request;
+use Under\\Http\\Response;
+
+Route::get('/hello', function (Request $request): Response {
+    return response()->view('hello', [
+        'name' => $request->query('name', 'Monde')
+    ]);
+});
+\`\`\`
+
+## Créer un Contrôleur
+
+Générez un nouveau contrôleur en utilisant l'outil Maker :
+
+\`\`\`bash
+php under make:controller WelcomeController
+\`\`\`
+
+Ceci crée un contrôleur dans \`app/Controllers/WelcomeController.php\` :
+
+\`\`\`php
+<?php
+
+namespace App\\Controllers;
+
+use Under\\Http\\Controller;
+use Under\\Http\\Request;
+use Under\\Http\\Response;
+
+class WelcomeController extends Controller
+{
+    public function index(Request $request): Response
+    {
+        return response()->view('welcome');
+    }
+    
+    public function show(Request $request, string $id): Response
+    {
+        return response()->json([
+            'id' => $id,
+            'message' => 'Bonjour du contrôleur!'
+        ]);
+    }
+}
+\`\`\`
+
+## Utiliser le Contrôleur
+
+Mettez à jour vos routes pour utiliser le contrôleur :
+
+\`\`\`php
+Route::get('/welcome', [WelcomeController::class, 'index']);
+Route::get('/welcome/{id}', [WelcomeController::class, 'show']);
+\`\`\`
+          `
+        }
+      },
+      {
+        id: "philosophie",
+        title: {
+          en: "Framework Philosophy",
+          fr: "Philosophie du framework"
+        },
+        content: {
+          en: `
+# Framework Philosophy
+
+Under Framework is built on core principles that guide its design and development approach.
+
+## Core Principles
+
+### 1. Developer Experience First
+We believe that great applications come from happy developers. Under prioritizes:
+- Clear, readable syntax
+- Comprehensive documentation
+- Intuitive APIs
+- Helpful error messages
+
+### 2. Modularity and Flexibility
+\`\`\`php
+// Components are self-contained and reusable
+$component = Component::make('UserProfile')
+    ->with('user', $user)
+    ->render();
+\`\`\`
+
+### 3. Convention Over Configuration
+Under follows sensible defaults while allowing customization:
+
+\`\`\`php
+// Auto-discovery of models, controllers, and services
+class UserController extends Controller
+{
+    // Automatically injected
+    public function __construct(
+        private UserService $userService
+    ) {}
+}
+\`\`\`
+
+### 4. Security by Design
+Security is not an afterthought:
+
+\`\`\`php
+// Built-in protection against common vulnerabilities
+Route::post('/users', [UserController::class, 'store'])
+    ->middleware(['auth', 'csrf', 'throttle:60,1']);
+\`\`\`
+
+## Architecture Philosophy
+
+Under promotes clean architecture through:
+- **Separation of Concerns**: Clear boundaries between layers
+- **Dependency Injection**: Loose coupling and testability
+- **Event-Driven Design**: Reactive and scalable applications
+          `,
+          fr: `
+# Philosophie du framework
+
+Under Framework est construit sur des principes fondamentaux qui guident sa conception et son approche de développement.
+
+## Principes Fondamentaux
+
+### 1. Expérience Développeur d'Abord
+Nous croyons que les grandes applications viennent de développeurs heureux. Under privilégie :
+- Syntaxe claire et lisible
+- Documentation complète
+- APIs intuitives
+- Messages d'erreur utiles
+
+### 2. Modularité et Flexibilité
+\`\`\`php
+// Les composants sont autonomes et réutilisables
+$component = Component::make('UserProfile')
+    ->with('user', $user)
+    ->render();
+\`\`\`
+
+### 3. Convention plutôt que Configuration
+Under suit des défauts sensés tout en permettant la personnalisation :
+
+\`\`\`php
+// Auto-découverte des modèles, contrôleurs et services
+class UserController extends Controller
+{
+    // Automatiquement injecté
+    public function __construct(
+        private UserService $userService
+    ) {}
+}
+\`\`\`
+
+### 4. Sécurité par Conception
+La sécurité n'est pas une réflexion après coup :
+
+\`\`\`php
+// Protection intégrée contre les vulnérabilités communes
+Route::post('/users', [UserController::class, 'store'])
+    ->middleware(['auth', 'csrf', 'throttle:60,1']);
+\`\`\`
+
+## Philosophie d'Architecture
+
+Under promeut une architecture propre à travers :
+- **Séparation des Préoccupations** : Frontières claires entre les couches
+- **Injection de Dépendances** : Couplage lâche et testabilité
+- **Conception Orientée Événements** : Applications réactives et évolutives
+          `
+        }
+      }
+    ]
+  },
+  {
+    id: "project-structure",
+    title: {
+      en: "Project Structure",
+      fr: "Structure du Projet"
+    },
+    items: [
+      {
+        id: "arborescence",
+        title: {
+          en: "Directory Structure",
+          fr: "Arborescence"
+        },
+        content: {
+          en: `
+# Directory Structure
+
+Understanding the Under Framework directory structure is essential for efficient development.
+
+## Root Directory Structure
+
+\`\`\`
+my-under-app/
+├── app/                    # Application core logic
+├── bootstrap/              # Application bootstrap files
+├── config/                 # Configuration files
+├── database/              # Database migrations and seeds
+├── public/                # Publicly accessible files
+├── resources/             # Views, assets, and language files
+├── routes/                # Route definitions
+├── storage/               # Generated files and logs
+├── tests/                 # Application tests
+├── vendor/                # Composer dependencies
+├── .env                   # Environment configuration
+├── .env.example          # Environment template
+├── composer.json         # PHP dependencies
+└── under                 # Under CLI tool
+\`\`\`
+
+## App Directory
+
+The heart of your application:
+
+\`\`\`
+app/
+├── Components/            # Reusable UI components
+├── Controllers/           # HTTP controllers
+├── Models/               # Chronos ORM models
+├── Services/             # Business logic services
+├── Middleware/           # HTTP middleware
+├── Events/               # Application events
+├── Listeners/            # Event listeners
+├── Jobs/                 # Queued jobs
+├── Mail/                 # Mail classes
+├── Notifications/        # Notification classes
+└── Providers/            # Service providers
+\`\`\`
+
+## Configuration Structure
+
+\`\`\`php
+// config/app.php
+return [
+    'name' => env('APP_NAME', 'Under Application'),
+    'env' => env('APP_ENV', 'production'),
+    'debug' => env('APP_DEBUG', false),
+    'url' => env('APP_URL', 'http://localhost'),
+    'timezone' => 'UTC',
+];
+\`\`\`
+          `,
+          fr: `
+# Arborescence
+
+Comprendre la structure de répertoires d'Under Framework est essentiel pour un développement efficace.
+
+## Structure du Répertoire Racine
+
+\`\`\`
+mon-app-under/
+├── app/                    # Logique principale de l'application
+├── bootstrap/              # Fichiers de démarrage de l'application
+├── config/                 # Fichiers de configuration
+├── database/              # Migrations et seeds de base de données
+├── public/                # Fichiers publiquement accessibles
+├── resources/             # Vues, assets et fichiers de langue
+├── routes/                # Définitions des routes
+├── storage/               # Fichiers générés et logs
+├── tests/                 # Tests de l'application
+├── vendor/                # Dépendances Composer
+├── .env                   # Configuration d'environnement
+├── .env.example          # Modèle d'environnement
+├── composer.json         # Dépendances PHP
+└── under                 # Outil CLI Under
+\`\`\`
+
+## Répertoire App
+
+Le cœur de votre application :
+
+\`\`\`
+app/
+├── Components/            # Composants UI réutilisables
+├── Controllers/           # Contrôleurs HTTP
+├── Models/               # Modèles Chronos ORM
+├── Services/             # Services de logique métier
+├── Middleware/           # Middleware HTTP
+├── Events/               # Événements d'application
+├── Listeners/            # Écouteurs d'événements
+├── Jobs/                 # Tâches en file d'attente
+├── Mail/                 # Classes de mail
+├── Notifications/        # Classes de notification
+└── Providers/            # Fournisseurs de services
+\`\`\`
+
+## Structure de Configuration
+
+\`\`\`php
+// config/app.php
+return [
+    'name' => env('APP_NAME', 'Application Under'),
+    'env' => env('APP_ENV', 'production'),
+    'debug' => env('APP_DEBUG', false),
+    'url' => env('APP_URL', 'http://localhost'),
+    'timezone' => 'UTC',
+];
+\`\`\`
+          `
+        }
+      },
+      {
+        id: "multi-applications",
+        title: {
+          en: "Multi-applications & Modules",
+          fr: "Multi-applications & modules"
+        },
+        content: {
+          en: `
+# Multi-applications & Modules
+
+Under Framework supports modular architecture for building scalable applications.
+
+## Module Structure
+
+Create isolated modules within your application:
+
+\`\`\`bash
+php under make:module Blog
+\`\`\`
+
+This generates:
+
+\`\`\`
+modules/
+└── Blog/
+    ├── Controllers/
+    ├── Models/
+    ├── Views/
+    ├── Routes/
+    ├── Config/
+    ├── Database/
+    │   ├── Migrations/
+    │   └── Seeds/
+    └── module.json
+\`\`\`
+
+## Module Configuration
+
+\`\`\`json
+{
+    "name": "Blog",
+    "alias": "blog",
+    "description": "Blog module for content management",
+    "version": "1.0.0",
+    "active": true,
+    "providers": [
+        "Modules\\\\Blog\\\\Providers\\\\BlogServiceProvider"
+    ]
+}
+\`\`\`
+
+## Cross-Module Communication
+
+\`\`\`php
+// In Blog module
+namespace Modules\\Blog\\Services;
+
+class BlogService
+{
+    public function getPublishedPosts(): Collection
+    {
+        return Post::where('status', 'published')->get();
+    }
+}
+
+// In another module
+$blogService = app(BlogService::class);
+$posts = $blogService->getPublishedPosts();
+\`\`\`
+
+## Module Routes
+
+\`\`\`php
+// modules/Blog/Routes/web.php
+Route::prefix('blog')->group(function () {
+    Route::get('/', [BlogController::class, 'index']);
+    Route::get('/post/{slug}', [BlogController::class, 'show']);
+});
+\`\`\`
+          `,
+          fr: `
+# Multi-applications & modules
+
+Under Framework supporte une architecture modulaire pour construire des applications évolutives.
+
+## Structure de Module
+
+Créez des modules isolés dans votre application :
+
+\`\`\`bash
+php under make:module Blog
+\`\`\`
+
+Ceci génère :
+
+\`\`\`
+modules/
+└── Blog/
+    ├── Controllers/
+    ├── Models/
+    ├── Views/
+    ├── Routes/
+    ├── Config/
+    ├── Database/
+    │   ├── Migrations/
+    │   └── Seeds/
+    └── module.json
+\`\`\`
+
+## Configuration de Module
+
+\`\`\`json
+{
+    "name": "Blog",
+    "alias": "blog",
+    "description": "Module de blog pour la gestion de contenu",
+    "version": "1.0.0",
+    "active": true,
+    "providers": [
+        "Modules\\\\Blog\\\\Providers\\\\BlogServiceProvider"
+    ]
+}
+\`\`\`
+
+## Communication Inter-Modules
+
+\`\`\`php
+// Dans le module Blog
+namespace Modules\\Blog\\Services;
+
+class BlogService
+{
+    public function getPublishedPosts(): Collection
+    {
+        return Post::where('status', 'published')->get();
+    }
+}
+
+// Dans un autre module
+$blogService = app(BlogService::class);
+$posts = $blogService->getPublishedPosts();
+\`\`\`
+
+## Routes de Module
+
+\`\`\`php
+// modules/Blog/Routes/web.php
+Route::prefix('blog')->group(function () {
+    Route::get('/', [BlogController::class, 'index']);
+    Route::get('/post/{slug}', [BlogController::class, 'show']);
+});
+\`\`\`
+          `
+        }
+      }
+    ]
+  },
+  {
+    id: "configuration",
+    title: {
+      en: "Configuration",
+      fr: "Configuration"
+    },
+    items: [
+      {
+        id: "fichiers-configuration",
+        title: {
+          en: "Configuration Files",
+          fr: "Fichiers de configuration"
+        },
+        content: {
+          en: `
+# Configuration Files
+
+Under Framework uses a simple yet powerful configuration system.
+
+## Configuration Structure
+
+All configuration files are stored in the \`config/\` directory:
+
+\`\`\`
+config/
+├── app.php              # Application settings
+├── database.php         # Database connections
+├── cache.php           # Cache configuration
+├── session.php         # Session configuration
+├── mail.php            # Mail settings
+├── auth.php            # Authentication
+└── services.php        # Third-party services
+\`\`\`
+
+## Application Configuration
+
+\`\`\`php
+// config/app.php
+return [
+    'name' => env('APP_NAME', 'Under Framework'),
+    'env' => env('APP_ENV', 'production'),
+    'debug' => env('APP_DEBUG', false),
+    'url' => env('APP_URL', 'http://localhost'),
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'locale' => env('APP_LOCALE', 'en'),
+    'fallback_locale' => 'en',
+    'faker_locale' => 'en_US',
+    'key' => env('APP_KEY'),
+    'cipher' => 'AES-256-CBC',
+];
+\`\`\`
+
+## Database Configuration
+
+\`\`\`php
+// config/database.php
+return [
+    'default' => env('DB_CONNECTION', 'mysql'),
+    
+    'connections' => [
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'under'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+        ],
+        
+        'redis' => [
+            'driver' => 'redis',
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
+        ],
+    ],
+];
+\`\`\`
+
+## Accessing Configuration
+
+\`\`\`php
+// Get configuration value
+$appName = config('app.name');
+$dbHost = config('database.connections.mysql.host');
+
+// Set configuration at runtime
+config(['app.debug' => true]);
+\`\`\`
+          `,
+          fr: `
+# Fichiers de configuration
+
+Under Framework utilise un système de configuration simple mais puissant.
+
+## Structure de Configuration
+
+Tous les fichiers de configuration sont stockés dans le répertoire \`config/\` :
+
+\`\`\`
+config/
+├── app.php              # Paramètres d'application
+├── database.php         # Connexions de base de données
+├── cache.php           # Configuration du cache
+├── session.php         # Configuration de session
+├── mail.php            # Paramètres de mail
+├── auth.php            # Authentification
+└── services.php        # Services tiers
+\`\`\`
+
+## Configuration d'Application
+
+\`\`\`php
+// config/app.php
+return [
+    'name' => env('APP_NAME', 'Under Framework'),
+    'env' => env('APP_ENV', 'production'),
+    'debug' => env('APP_DEBUG', false),
+    'url' => env('APP_URL', 'http://localhost'),
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'locale' => env('APP_LOCALE', 'fr'),
+    'fallback_locale' => 'en',
+    'faker_locale' => 'fr_FR',
+    'key' => env('APP_KEY'),
+    'cipher' => 'AES-256-CBC',
+];
+\`\`\`
+
+## Configuration de Base de Données
+
+\`\`\`php
+// config/database.php
+return [
+    'default' => env('DB_CONNECTION', 'mysql'),
+    
+    'connections' => [
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'under'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+        ],
+        
+        'redis' => [
+            'driver' => 'redis',
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
+        ],
+    ],
+];
+\`\`\`
+
+## Accéder à la Configuration
+
+\`\`\`php
+// Obtenir une valeur de configuration
+$appName = config('app.name');
+$dbHost = config('database.connections.mysql.host');
+
+// Définir la configuration à l'exécution
+config(['app.debug' => true]);
+\`\`\`
+          `
+        }
+      }
+    ]
+  },
+  {
+    id: "fundamentals",
+    title: {
+      en: "Fundamentals",
+      fr: "Fondamentaux"
+    },
+    items: [
+      {
+        id: "routing",
+        title: {
+          en: "🧭 Routing",
+          fr: "🧭 Routing"
+        },
+        content: {
+          en: `
+# 🧭 Routing
+
+Under Framework provides a powerful and flexible routing system for defining application endpoints.
+
+## Basic Routes
+
+Define routes in \`routes/web.php\`:
+
+\`\`\`php
+<?php
+
+use Under\\Support\\Facades\\Route;
+use App\\Controllers\\HomeController;
+
+// Basic GET route
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// POST route
+Route::post('/users', function () {
+    return 'Creating a new user';
+});
+
+// Multiple HTTP verbs
+Route::match(['get', 'post'], '/contact', function () {
+    return 'Contact form';
+});
+
+// Any HTTP verb
+Route::any('/webhook', function () {
+    return 'Webhook endpoint';
+});
+\`\`\`
+
+## Route Parameters
+
+\`\`\`php
+// Required parameters
+Route::get('/user/{id}', function ($id) {
+    return "User ID: " . $id;
+});
+
+// Optional parameters
+Route::get('/user/{id?}', function ($id = null) {
+    return $id ? "User ID: " . $id : "All users";
+});
+
+// Multiple parameters
+Route::get('/user/{id}/post/{postId}', function ($id, $postId) {
+    return "User {$id}, Post {$postId}";
+});
+\`\`\`
+
+## Route Constraints
+
+\`\`\`php
+// Numeric constraint
+Route::get('/user/{id}', function ($id) {
+    return "User ID: " . $id;
+})->where('id', '[0-9]+');
+
+// Alphabetic constraint
+Route::get('/user/{name}', function ($name) {
+    return "User: " . $name;
+})->where('name', '[a-zA-Z]+');
+
+// Multiple constraints
+Route::get('/user/{id}/post/{slug}', function ($id, $slug) {
+    return "User {$id}, Post {$slug}";
+})->where(['id' => '[0-9]+', 'slug' => '[a-z-]+']);
+\`\`\`
+
+## Named Routes
+
+\`\`\`php
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
+
+// Generate URLs
+$url = route('dashboard'); // /dashboard
+$url = route('user.profile', ['id' => 1]); // /user/1/profile
+\`\`\`
+
+## Route Groups
+
+\`\`\`php
+// Prefix grouping
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/users', [AdminController::class, 'users']);
+});
+
+// Middleware grouping
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::post('/profile', [ProfileController::class, 'update']);
+});
+
+// Namespace grouping
+Route::namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+});
+\`\`\`
+
+## RESTful Resource Routes
+
+\`\`\`php
+// Generates all CRUD routes
+Route::resource('posts', PostController::class);
+
+/*
+GET     /posts           index
+GET     /posts/create    create
+POST    /posts           store
+GET     /posts/{id}      show
+GET     /posts/{id}/edit edit
+PUT     /posts/{id}      update
+DELETE  /posts/{id}      destroy
+*/
+
+// Partial resource routes
+Route::resource('posts', PostController::class)->only([
+    'index', 'show', 'store'
+]);
+
+Route::resource('posts', PostController::class)->except([
+    'destroy'
+]);
+\`\`\`
+          `,
+          fr: `
+# 🧭 Routing
+
+Under Framework fournit un système de routage puissant et flexible pour définir les endpoints d'application.
+
+## Routes de Base
+
+Définissez les routes dans \`routes/web.php\` :
+
+\`\`\`php
+<?php
+
+use Under\\Support\\Facades\\Route;
+use App\\Controllers\\HomeController;
+
+// Route GET basique
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route POST
+Route::post('/users', function () {
+    return 'Création d\'un nouvel utilisateur';
+});
+
+// Plusieurs verbes HTTP
+Route::match(['get', 'post'], '/contact', function () {
+    return 'Formulaire de contact';
+});
+
+// N'importe quel verbe HTTP
+Route::any('/webhook', function () {
+    return 'Point de terminaison webhook';
+});
+\`\`\`
+
+## Paramètres de Route
+
+\`\`\`php
+// Paramètres requis
+Route::get('/user/{id}', function ($id) {
+    return "ID Utilisateur: " . $id;
+});
+
+// Paramètres optionnels
+Route::get('/user/{id?}', function ($id = null) {
+    return $id ? "ID Utilisateur: " . $id : "Tous les utilisateurs";
+});
+
+// Paramètres multiples
+Route::get('/user/{id}/post/{postId}', function ($id, $postId) {
+    return "Utilisateur {$id}, Article {$postId}";
+});
+\`\`\`
+
+## Contraintes de Route
+
+\`\`\`php
+// Contrainte numérique
+Route::get('/user/{id}', function ($id) {
+    return "ID Utilisateur: " . $id;
+})->where('id', '[0-9]+');
+
+// Contrainte alphabétique
+Route::get('/user/{name}', function ($name) {
+    return "Utilisateur: " . $name;
+})->where('name', '[a-zA-Z]+');
+
+// Contraintes multiples
+Route::get('/user/{id}/post/{slug}', function ($id, $slug) {
+    return "Utilisateur {$id}, Article {$slug}";
+})->where(['id' => '[0-9]+', 'slug' => '[a-z-]+']);
+\`\`\`
+
+## Routes Nommées
+
+\`\`\`php
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
+
+// Générer des URLs
+$url = route('dashboard'); // /dashboard
+$url = route('user.profile', ['id' => 1]); // /user/1/profile
+\`\`\`
+
+## Groupes de Routes
+
+\`\`\`php
+// Groupement par préfixe
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/users', [AdminController::class, 'users']);
+});
+
+// Groupement par middleware
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::post('/profile', [ProfileController::class, 'update']);
+});
+
+// Groupement par namespace
+Route::namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+});
+\`\`\`
+
+## Routes Ressources RESTful
+
+\`\`\`php
+// Génère toutes les routes CRUD
+Route::resource('posts', PostController::class);
+
+/*
+GET     /posts           index
+GET     /posts/create    create
+POST    /posts           store
+GET     /posts/{id}      show
+GET     /posts/{id}/edit edit
+PUT     /posts/{id}      update
+DELETE  /posts/{id}      destroy
+*/
+
+// Routes ressources partielles
+Route::resource('posts', PostController::class)->only([
+    'index', 'show', 'store'
+]);
+
+Route::resource('posts', PostController::class)->except([
+    'destroy'
+]);
+\`\`\`
+          `
+        }
+      },
+      {
+        id: "chronos-orm",
+        title: {
+          en: "🧠 Chronos ORM",
+          fr: "🧠 Chronos ORM"
+        },
+        content: {
+          en: `
+# 🧠 Chronos ORM
+
+Chronos is Under Framework's elegant and powerful Object-Relational Mapping (ORM) system.
+
+## Defining Models
+
+\`\`\`php
+<?php
+
+namespace App\\Models;
+
+use Under\\Database\\Chronos\\Model;
+
+class User extends Model
+{
+    protected $table = 'users';
+    
+    protected $fillable = [
+        'name', 'email', 'password'
+    ];
+    
+    protected $hidden = [
+        'password', 'remember_token'
+    ];
+    
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'is_active' => 'boolean'
+    ];
+}
+\`\`\`
+
+## Basic Queries
+
+\`\`\`php
+// Retrieve all records
+$users = User::all();
+
+// Find by primary key
+$user = User::find(1);
+$user = User::findOrFail(1); // Throws exception if not found
+
+// Where clauses
+$activeUsers = User::where('is_active', true)->get();
+$user = User::where('email', 'john@example.com')->first();
+
+// Multiple conditions
+$users = User::where('is_active', true)
+             ->where('created_at', '>', '2023-01-01')
+             ->orderBy('name')
+             ->get();
+\`\`\`
+
+## Advanced Queries
+
+\`\`\`php
+// Query builder methods
+$users = User::select('name', 'email')
+             ->where('is_active', true)
+             ->orderBy('created_at', 'desc')
+             ->limit(10)
+             ->get();
+
+// Aggregates
+$count = User::count();
+$maxId = User::max('id');
+$avgAge = User::avg('age');
+
+// Chunking for large datasets
+User::chunk(100, function ($users) {
+    foreach ($users as $user) {
+        // Process user
+    }
+});
+\`\`\`
+
+## Relationships
+
+\`\`\`php
+class User extends Model
+{
+    // One-to-many relationship
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
+    // Many-to-many relationship
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)
+                    ->withTimestamps()
+                    ->withPivot('assigned_by');
+    }
+    
+    // One-to-one relationship
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+}
+
+class Post extends Model
+{
+    // Inverse relationship
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    // Many-to-many relationship
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+}
+\`\`\`
+
+## Eager Loading
+
+\`\`\`php
+// Prevent N+1 query problem
+$users = User::with('posts')->get();
+$users = User::with(['posts', 'profile'])->get();
+
+// Nested relationships
+$users = User::with('posts.comments')->get();
+
+// Conditional eager loading
+$users = User::with(['posts' => function ($query) {
+    $query->where('published', true);
+}])->get();
+\`\`\`
+
+## Creating and Updating
+
+\`\`\`php
+// Create new record
+$user = new User();
+$user->name = 'John Doe';
+$user->email = 'john@example.com';
+$user->save();
+
+// Mass assignment
+$user = User::create([
+    'name' => 'Jane Doe',
+    'email' => 'jane@example.com',
+    'password' => bcrypt('password')
+]);
+
+// Update existing record
+$user = User::find(1);
+$user->name = 'Updated Name';
+$user->save();
+
+// Mass update
+User::where('is_active', false)
+    ->update(['last_login' => null]);
+\`\`\`
+
+## Transactions
+
+\`\`\`php
+use Under\\Support\\Facades\\DB;
+
+DB::transaction(function () {
+    $user = User::create([
+        'name' => 'John Doe',
+        'email' => 'john@example.com'
+    ]);
+    
+    $user->profile()->create([
+        'bio' => 'Software Developer'
+    ]);
+    
+    // If any operation fails, entire transaction is rolled back
+});
+\`\`\`
+          `,
+          fr: `
+# 🧠 Chronos ORM
+
+Chronos est le système de mapping objet-relationnel (ORM) élégant et puissant d'Under Framework.
+
+## Définir des Modèles
+
+\`\`\`php
+<?php
+
+namespace App\\Models;
+
+use Under\\Database\\Chronos\\Model;
+
+class User extends Model
+{
+    protected $table = 'users';
+    
+    protected $fillable = [
+        'name', 'email', 'password'
+    ];
+    
+    protected $hidden = [
+        'password', 'remember_token'
+    ];
+    
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'is_active' => 'boolean'
+    ];
+}
+\`\`\`
+
+## Requêtes de Base
+
+\`\`\`php
+// Récupérer tous les enregistrements
+$users = User::all();
+
+// Trouver par clé primaire
+$user = User::find(1);
+$user = User::findOrFail(1); // Lève une exception si non trouvé
+
+// Clauses where
+$activeUsers = User::where('is_active', true)->get();
+$user = User::where('email', 'john@example.com')->first();
+
+// Conditions multiples
+$users = User::where('is_active', true)
+             ->where('created_at', '>', '2023-01-01')
+             ->orderBy('name')
+             ->get();
+\`\`\`
+
+## Requêtes Avancées
+
+\`\`\`php
+// Méthodes du constructeur de requêtes
+$users = User::select('name', 'email')
+             ->where('is_active', true)
+             ->orderBy('created_at', 'desc')
+             ->limit(10)
+             ->get();
+
+// Agrégats
+$count = User::count();
+$maxId = User::max('id');
+$avgAge = User::avg('age');
+
+// Chunking pour de gros datasets
+User::chunk(100, function ($users) {
+    foreach ($users as $user) {
+        // Traiter l'utilisateur
+    }
+});
+\`\`\`
+
+## Relations
+
+\`\`\`php
+class User extends Model
+{
+    // Relation un-à-plusieurs
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
+    // Relation plusieurs-à-plusieurs
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)
+                    ->withTimestamps()
+                    ->withPivot('assigned_by');
+    }
+    
+    // Relation un-à-un
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+}
+
+class Post extends Model
+{
+    // Relation inverse
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    // Relation plusieurs-à-plusieurs
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+}
+\`\`\`
+
+## Chargement Eager
+
+\`\`\`php
+// Prévenir le problème de requête N+1
+$users = User::with('posts')->get();
+$users = User::with(['posts', 'profile'])->get();
+
+// Relations imbriquées
+$users = User::with('posts.comments')->get();
+
+// Chargement eager conditionnel
+$users = User::with(['posts' => function ($query) {
+    $query->where('published', true);
+}])->get();
+\`\`\`
+
+## Création et Mise à Jour
+
+\`\`\`php
+// Créer un nouvel enregistrement
+$user = new User();
+$user->name = 'Jean Dupont';
+$user->email = 'jean@exemple.com';
+$user->save();
+
+// Attribution de masse
+$user = User::create([
+    'name' => 'Jeanne Dupont',
+    'email' => 'jeanne@exemple.com',
+    'password' => bcrypt('motdepasse')
+]);
+
+// Mettre à jour un enregistrement existant
+$user = User::find(1);
+$user->name = 'Nom Mis à Jour';
+$user->save();
+
+// Mise à jour de masse
+User::where('is_active', false)
+    ->update(['last_login' => null]);
+\`\`\`
+
+## Transactions
+
+\`\`\`php
+use Under\\Support\\Facades\\DB;
+
+DB::transaction(function () {
+    $user = User::create([
+        'name' => 'Jean Dupont',
+        'email' => 'jean@exemple.com'
+    ]);
+    
+    $user->profile()->create([
+        'bio' => 'Développeur Logiciel'
+    ]);
+    
+    // Si une opération échoue, toute la transaction est annulée
+});
+\`\`\`
+          `
+        }
       }
     ]
   }
 ];
 
-export const searchDocumentation = (query: string): DocItem[] => {
+export const searchDocumentation = (query: string, language: 'en' | 'fr' = 'en'): DocItem[] => {
   if (!query.trim()) return [];
   
   const results: DocItem[] = [];
@@ -382,10 +1641,10 @@ export const searchDocumentation = (query: string): DocItem[] => {
   
   documentationData.forEach(section => {
     section.items.forEach(item => {
-      if (
-        item.title.toLowerCase().includes(searchTerm) ||
-        item.content?.toLowerCase().includes(searchTerm)
-      ) {
+      const title = item.title[language].toLowerCase();
+      const content = item.content?.[language]?.toLowerCase() || '';
+      
+      if (title.includes(searchTerm) || content.includes(searchTerm)) {
         results.push(item);
       }
     });

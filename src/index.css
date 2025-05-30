@@ -35,10 +35,9 @@
 
     --radius: 0.5rem;
 
-    /* Laravel specific colors */
-    --laravel-red: 0 100% 67%;
-    --laravel-dark: 220 26% 14%;
-    --laravel-gray: 220 13% 91%;
+    /* Under specific colors */
+    --under-primary: 247 44% 60%;
+    --under-primary-foreground: 0 0% 100%;
   }
 
   .dark {
@@ -51,7 +50,7 @@
     --popover: 220 26% 14%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 0 100% 67%;
+    --primary: 247 44% 60%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -68,7 +67,18 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 0 100% 67%;
+    --ring: 247 44% 60%;
+  }
+
+  /* Custom selection colors */
+  ::selection {
+    background-color: rgba(136, 146, 190, 0.3);
+    color: #8892BE;
+  }
+
+  ::-moz-selection {
+    background-color: rgba(136, 146, 190, 0.3);
+    color: #8892BE;
   }
 }
 
@@ -110,7 +120,7 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-primary pl-4 italic text-muted-foreground;
+    @apply border-l-4 border-[#8892BE] pl-4 italic text-muted-foreground;
   }
 
   .prose ul {
@@ -126,11 +136,11 @@
   }
 
   .prose a {
-    @apply text-primary hover:text-primary/80 transition-colors;
+    @apply text-[#8892BE] hover:text-[#8892BE]/80 transition-colors;
   }
 }
 
-/* Laravel-specific animations */
+/* Under-specific animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -156,4 +166,26 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Code block styling */
+pre code {
+  color: #e1e5e9 !important;
+  background: transparent !important;
+}
+
+.language-php .token.keyword {
+  color: #c792ea;
+}
+
+.language-php .token.string {
+  color: #c3e88d;
+}
+
+.language-php .token.comment {
+  color: #546e7a;
+}
+
+.language-bash .token.command {
+  color: #82aaff;
 }

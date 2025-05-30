@@ -3,6 +3,8 @@ import { useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { documentationData, DocItem } from '@/data/documentation';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { parseMarkdownWithCodeBlocks } from '@/utils/markdownParser';
 
 interface ContentProps {
   activeSection: string;
@@ -12,6 +14,8 @@ interface ContentProps {
 }
 
 const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: ContentProps) => {
+  const { language, t } = useLanguage();
+
   const currentContent = useMemo(() => {
     if (searchResults.length > 0) {
       return null; // We'll show search results instead
@@ -29,11 +33,11 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
     if (!section) return [];
     
     return [
-      { title: 'Documentation', href: '#' },
-      { title: section.title, href: '#' },
-      { title: currentContent?.title || '', href: '#' }
+      { title: t('breadcrumb.documentation'), href: '#' },
+      { title: section.title[language], href: '#' },
+      { title: currentContent?.title[language] || '', href: '#' }
     ];
-  }, [activeSection, currentContent]);
+  }, [activeSection, currentContent, language, t]);
 
   const navigation = useMemo(() => {
     const allItems: Array<{ sectionId: string; item: DocItem }> = [];
@@ -59,15 +63,17 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
       <main className="flex-1 overflow-y-auto">
         <div className="container max-w-4xl px-6 py-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Search Results</h1>
-            <p className="text-muted-foreground">Found {searchResults.length} results</p>
+            <h1 className="text-3xl font-bold mb-2">{t('search.results')}</h1>
+            <p className="text-muted-foreground">
+              {t('search.found').replace('{count}', searchResults.length.toString())}
+            </p>
           </div>
           
           <div className="space-y-6">
             {searchResults.map((item) => (
               <div
                 key={item.id}
-                className="p-6 border rounded-lg hover:border-red-200 transition-colors cursor-pointer"
+                className="p-6 border rounded-lg hover:border-[#8892BE]/50 transition-colors cursor-pointer"
                 onClick={() => {
                   const section = documentationData.find(s => 
                     s.items.some(i => i.id === item.id)
@@ -77,9 +83,11 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
                   }
                 }}
               >
-                <h3 className="text-xl font-semibold mb-2 text-red-600">{item.title}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-[#8892BE]">
+                  {item.title[language]}
+                </h3>
                 <p className="text-muted-foreground line-clamp-3">
-                  {item.content?.substring(0, 200)}...
+                  {item.content?.[language]?.substring(0, 200)}...
                 </p>
               </div>
             ))}
@@ -95,13 +103,15 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
         <div className="container max-w-4xl px-6 py-8">
           <div className="text-center py-20">
             <Home className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-            <h1 className="text-2xl font-bold mb-2">Welcome to Laravel Documentation</h1>
-            <p className="text-muted-foreground">Select a topic from the sidebar to get started.</p>
+            <h1 className="text-2xl font-bold mb-2">{t('welcome.title')}</h1>
+            <p className="text-muted-foreground">{t('welcome.subtitle')}</p>
           </div>
         </div>
       </main>
     );
   }
+
+  const contentMarkdown = currentContent.content?.[language] || '';
 
   return (
     <main className="flex-1 overflow-y-auto">
@@ -120,7 +130,9 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
 
         {/* Content */}
         <article className="prose prose-lg max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: currentContent.content?.replace(/\n/g, '<br>') || '' }} />
+          <div className="space-y-4">
+            {parseMarkdownWithCodeBlocks(contentMarkdown)}
+          </div>
         </article>
 
         {/* Navigation */}
@@ -133,8 +145,8 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
             >
               <ChevronLeft className="h-4 w-4" />
               <div className="text-left">
-                <div className="text-xs text-muted-foreground">Previous</div>
-                <div className="font-medium">{navigation.prev.item.title}</div>
+                <div className="text-xs text-muted-foreground">{t('nav.previous')}</div>
+                <div className="font-medium">{navigation.prev.item.title[language]}</div>
               </div>
             </Button>
           ) : (
@@ -148,8 +160,8 @@ const Content = ({ activeSection, activeItem, searchResults, onItemSelect }: Con
               className="flex items-center space-x-2"
             >
               <div className="text-right">
-                <div className="text-xs text-muted-foreground">Next</div>
-                <div className="font-medium">{navigation.next.item.title}</div>
+                <div className="text-xs text-muted-foreground">{t('nav.next')}</div>
+                <div className="font-medium">{navigation.next.item.title[language]}</div>
               </div>
               <ChevronRight className="h-4 w-4" />
             </Button>

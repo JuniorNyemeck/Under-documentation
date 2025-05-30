@@ -4,10 +4,11 @@ import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Content from '@/components/Content';
 import { DocItem } from '@/data/documentation';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
-const Index = () => {
-  const [activeSection, setActiveSection] = useState('prologue');
-  const [activeItem, setActiveItem] = useState('release-notes');
+const IndexContent = () => {
+  const [activeSection, setActiveSection] = useState('getting-started');
+  const [activeItem, setActiveItem] = useState('introduction');
   const [searchResults, setSearchResults] = useState<DocItem[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -77,6 +78,14 @@ const Index = () => {
         />
       </div>
     </div>
+  );
+};
+
+const Index = () => {
+  return (
+    <LanguageProvider>
+      <IndexContent />
+    </LanguageProvider>
   );
 };
 
