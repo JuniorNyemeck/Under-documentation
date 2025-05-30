@@ -1,4 +1,5 @@
 
+import React from 'react';
 import CodeBlock from '@/components/CodeBlock';
 
 export const parseMarkdownWithCodeBlocks = (content: string): React.ReactNode => {
