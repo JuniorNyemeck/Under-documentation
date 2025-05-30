@@ -1,4 +1,36 @@
-export const documentationData = [
+export interface DocItem {
+  id: string;
+  title: { en: string; fr: string };
+  content?: { en: string; fr: string };
+}
+
+export interface DocSection {
+  id: string;
+  title: { en: string; fr: string };
+  items: DocItem[];
+}
+
+export const searchDocumentation = (query: string, language: 'en' | 'fr'): DocItem[] => {
+  if (!query.trim()) return [];
+  
+  const results: DocItem[] = [];
+  const searchTerm = query.toLowerCase();
+  
+  documentationData.forEach(section => {
+    section.items.forEach(item => {
+      const title = item.title[language].toLowerCase();
+      const content = item.content?.[language]?.toLowerCase() || '';
+      
+      if (title.includes(searchTerm) || content.includes(searchTerm)) {
+        results.push(item);
+      }
+    });
+  });
+  
+  return results;
+};
+
+export const documentationData: DocSection[] = [
   {
     id: 'getting-started',
     title: { en: 'Getting Started', fr: 'Premiers pas' },
